@@ -45,8 +45,8 @@ function run() {
   }
 
   const tags = [];
-  if (rawTargetFile.toLowerCase().match('childhood')) {
-    tags.push('childhood');
+  if (rawTargetFile.toLowerCase().match("childhood")) {
+    tags.push("childhood");
   }
 
   const contents = fs.readFileSync(targetFile).toString().split("\n");
@@ -99,9 +99,23 @@ function run() {
 
     writeFile(
       `./DATA/OUTPUT/${rawTargetFile.replace(".txt", ".js")}`,
-      `module.exports = ${JSON.stringify(outPutWithImdbData)};`
+      `module.exports = ${JSON.stringify(outPutWithImdbData)};`,
     );
   });
 }
 
-run();
+// run();
+
+function copyToPersonalWebsite() {
+  const childhoodShows = require("../DATA/OUTPUT/tvFromChildhood");
+  const adulthoodShows = require("../DATA/OUTPUT/tvFromAdulthood");
+
+  const combined = [...childhoodShows, ...adulthoodShows];
+
+  writeFile(
+    "../masonjenningsIOv2/src/DATA/tvWatched.js",
+    `module.exports = ${JSON.stringify(combined)};`
+  );
+}
+
+copyToPersonalWebsite();
