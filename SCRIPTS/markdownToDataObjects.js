@@ -97,11 +97,9 @@ function run() {
       return { ...item, tags, imdbData };
     });
 
-    const contents = `module.exports = ${JSON.stringify(outPutWithImdbData)};`;
-
     writeFile(
       `./DATA/OUTPUT/${rawTargetFile.replace(".txt", ".js")}`,
-      contents
+      `module.exports = ${JSON.stringify(outPutWithImdbData)};`,
     );
   });
 }
