@@ -90,6 +90,7 @@ function run() {
       const cacheName = `./DATA/CACHED/${item.imdbId}.js`;
       if (fs.existsSync(cacheName)) {
         const d = fs.readFileSync(cacheName).toString();
+
         // Saved these files as modules instead of plain json, so have to decode
         imdbData = JSON.parse(d.match(/{.*}/)[0]);
       }
@@ -104,8 +105,6 @@ function run() {
   });
 }
 
-// run();
-
 function copyToPersonalWebsite() {
   const childhoodShows = require("../DATA/OUTPUT/tvFromChildhood");
   const adulthoodShows = require("../DATA/OUTPUT/tvFromAdulthood");
@@ -117,5 +116,7 @@ function copyToPersonalWebsite() {
     `module.exports = ${JSON.stringify(combined)};`
   );
 }
+
+// run();
 
 copyToPersonalWebsite();
